@@ -48,6 +48,9 @@ then press any key to continue...
     -d couchpotato.$NGINX_HOST \
     -d headphones.$NGINX_HOST \
     -d plex.$NGINX_HOST
+  
+  echo "Generating dhparam"
+  docker run -v $(pwd)/certs:/certs -t jordi/openssl-ca openssl dhparam -out /certs/dhparam.pem 2048
 fi
 
 docker-compose create
