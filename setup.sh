@@ -50,6 +50,8 @@ then press any key to continue...
     -d plex.$NGINX_HOST
 fi
 
+docker-compose build .
+
 echo "
-Done! Now run \`docker-compose up\` and go to $NGINX_HOST in your browser.
+Done! Now run \`docker-compose start\` and go to $NGINX_HOST in your browser.
 "
