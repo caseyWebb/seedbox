@@ -1,16 +1,4 @@
 #!/bin/bash
-
-NGINX_HOST=*
-NGINX_PORT=5330
-MEDIA_ROOT=~/media
-CERTBOT_EMAIL=user@example.com
-
-# linuxserver.io stuff, don't change unless you know what you're doing
-PUID=5330
-PGID=5330
-
-DOLLAR=$
-
 source .env
 
 echo "

@@ -73,8 +73,9 @@ services:
     network_mode: host
     volumes:
       - ./volumes/plex:/config
-      - "${MEDIA_ROOT}/tv:/data/tvshows"
+      - "${MEDIA_ROOT}/tv:/data/tv"
       - "${MEDIA_ROOT}/movies:/data/movies"
+      - "${MEDIA_ROOT}/music:/data/music"
     env_file: .env
     environment:
       VERSION: latest
