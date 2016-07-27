@@ -9,6 +9,8 @@ CERTBOT_EMAIL=user@example.com
 PUID=5330
 PGID=5330
 
+DOLLAR=$
+
 source .env
 
 echo "
@@ -53,14 +55,13 @@ open the following ports in your router and firewall:
 
 then press any key to continue...
 " _
-  docker run -v $(pwd)/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone \
-    -d www.$NGINX_HOST \
-    -d deluge.$NGINX_HOST \
-    -d nzbget.$NGINX_HOST \
-    -d sonarr.$NGINX_HOST \
-    -d couchpotato.$NGINX_HOST \
-    -d headphones.$NGINX_HOST \
-    -d plex.$NGINX_HOST
+  docker run -v $(pwd)/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d www.$NGINX_HOST
+  docker run -v $(pwd)/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d deluge.$NGINX_HOST \
+  docker run -v $(pwd)/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d nzbget.$NGINX_HOST \
+  docker run -v $(pwd)/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d sonarr.$NGINX_HOST \
+  docker run -v $(pwd)/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d couchpotato.$NGINX_HOST \
+  docker run -v $(pwd)/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d headphones.$NGINX_HOST \
+  docker run -v $(pwd)/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d plex.$NGINX_HOST
 
   docker run -v $(pwd)/certs:/certs -t jordi/openssl-ca openssl dhparam -out /certs/dhparam.pem 2048
 fi
