@@ -31,10 +31,14 @@ if ! id -u seedbox > /dev/null 2>&1; then
   useradd -u 5330 -g 5330 -d $MEDIA_ROOT seedbox
 fi
 
+chown seedbox:seedbox -R .
+chown seedbox:seedbox -R $MEDIA_ROOT
+
 if [ ! -d ./certs/live ]; then
   read -n1 -r -p "
 Please add a DNS A or CNAME record for each of the following subdomains:
   deluge.$NGINX_HOST
+  nzbget.$NGINX_HOST
   sonarr.$NGINX_HOST
   couchpotato.$NGINX_HOST
   headphones.$NGINX_HOST
@@ -52,6 +56,7 @@ then press any key to continue...
   docker run -v $(pwd)/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone \
     -d www.$NGINX_HOST \
     -d deluge.$NGINX_HOST \
+    -d nzbget.$NGINX_HOST \
     -d sonarr.$NGINX_HOST \
     -d couchpotato.$NGINX_HOST \
     -d headphones.$NGINX_HOST \
