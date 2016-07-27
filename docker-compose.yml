@@ -7,6 +7,7 @@ services:
     network_mode: host
     volumes:
      - ./nginx/conf.d.template:/etc/nginx/conf.d.template:ro
+     - ./certs:/certs:ro
      - ./nginx/www:/srv/www
     env_file: .env
     command: /bin/bash -c "/etc/nginx/conf.d.template/make_configs.sh && nginx -g 'daemon off;'"
