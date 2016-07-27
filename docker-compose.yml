@@ -45,6 +45,17 @@ services:
       - "${MEDIA_ROOT}/movies:/movies"
     env_file: .env
 
+  headphones:
+    container_name: headphones
+    image: linuxserver/headphones
+    network_mode: host
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./volumes/headphones:/config
+      - "${MEDIA_ROOT}/.downloads:/downloads"
+      - "${MEDIA_ROOT}/music:/music"
+    env_file: .env
+
   plex:
     container_name: plex
     image: linuxserver/plex
