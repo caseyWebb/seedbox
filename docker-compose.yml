@@ -6,9 +6,8 @@ services:
     image: nginx
     network_mode: host
     volumes:
-     - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-     - ./nginx/sites-enabled:/etc/nginx/sites-enabled:ro
-     - ./nginx/www:/srv/www
+     - ./nginx/conf.d:/etc/nginx/conf.d:ro
+     - ./nginx/www:/srv/www:ro
     env_file: .env
 
   deluge:
@@ -20,8 +19,8 @@ services:
       - ./volumes/deluge:/config
       - "${MEDIA_ROOT}/.downloads:/downloads"
       - "${MEDIA_ROOT}/.torrents:/torrents"
-      - "${MEDIA_ROOT}/movies:/movies"
-      - "${MEDIA_ROOT}/tv:/tv"
+      - "${MEDIA_ROOT}/movies:/movies:ro"
+      - "${MEDIA_ROOT}/tv:/tv:ro"
     env_file: .env
 
   nzbget:
