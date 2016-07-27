@@ -7,8 +7,9 @@ services:
     network_mode: host
     volumes:
      - ./nginx/conf.d:/etc/nginx/conf.d:ro
-     - ./nginx/www:/srv/www:ro
+     - ./nginx/www:/srv/www
     env_file: .env
+    command: /bin/bash -c "/etc/nginx/conf.d/make_configs.sh && nginx -g 'daemon off;'"
 
   deluge:
     container_name: deluge
