@@ -6,10 +6,10 @@ services:
     image: nginx
     network_mode: host
     volumes:
-     - ./nginx/conf.d:/etc/nginx/conf.d:ro
+     - ./nginx/conf.d.template:/etc/nginx/conf.d.template:ro
      - ./nginx/www:/srv/www
     env_file: .env
-    command: /bin/bash -c "/etc/nginx/conf.d/make_configs.sh && nginx -g 'daemon off;'"
+    command: /bin/bash -c "/etc/nginx/conf.d.template/make_configs.sh && nginx -g 'daemon off;'"
 
   deluge:
     container_name: deluge
