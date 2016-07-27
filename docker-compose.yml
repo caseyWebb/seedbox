@@ -1,0 +1,58 @@
+version: '2'
+
+services:
+  deluge:
+    container_name: deluge
+    image: linuxserver/deluge
+    network_mode: host
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./volumes/deluge:/config
+      - "${MEDIA_ROOT}/.downloads:/downloads"
+      - "${MEDIA_ROOT}/.torrents:/torrents"
+      - "${MEDIA_ROOT}/movies:/movies"
+      - "${MEDIA_ROOT}/tv:/tv"
+    env_file: .env
+
+  nzbget:
+    container_name: nzbget
+    image: linuxserver/nzbget
+    network_mode: host
+    volumes:
+      - ./volumes/nzbget:/config
+      - "${MEDIA_ROOT}/.downloads:/downloads"
+    env_file: .env
+
+  sonarr:
+    container_name: sonarr
+    image: linuxserver/sonarr
+    network_mode: host
+    volumes:
+      - /dev/rtc:/dev/rtc:ro
+      - ./volumes/sonarr:/config
+      - "${MEDIA_ROOT}/.downloads:/downloads"
+      - "${MEDIA_ROOT}/tv:/tv"
+    env_file: .env
+
+  couchpotato:
+    container_name: couchpotato
+    image: linuxserver/couchpotato
+    network_mode: host
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./volumes/couchpotato:/config
+      - "${MEDIA_ROOT}/.downloads:/downloads"
+      - "${MEDIA_ROOT}/movies:/movies"
+    env_file: .env
+
+  plex:
+    container_name: plex
+    image: linuxserver/plex
+    network_mode: host
+    volumes:
+      - ./volumes/plex:/config
+      - "${MEDIA_ROOT}/tv:/data/tvshows"
+      - "${MEDIA_ROOT}/movies:/data/movies"
+    env_file: .env
+    environment:
+      VERSION: latest

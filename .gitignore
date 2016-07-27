@@ -1,0 +1,6 @@
+volumes/
+!volumes/couchpotato/config.ini
+!volumes/deluge/core.conf
+!volumes/sonarr/config.xml
+
+.env

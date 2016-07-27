@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>StonerCoder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      font-family: Montserrat;
+      margin: 0;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .curtain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding-top: 30vh;
+      background: #556270;
+      color: rgba(255,255,255,0.4);
+    }
+    .curtain .fa-lock {
+      font-size: 172px;
+      color: rgba(255,255,255,0.1);
+    }
+    input {
+      margin-top: 20px;
+      background-color: rgba(255,255,255,0.2);
+      border: none;
+      border-radius: 2px;
+      font-size: 14px;
+      padding: 5px;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+    }
+    input:focus {
+      outline: none;
+    }
+    .quote {
+      margin-top: 40px;
+      font-weight: bold;
+      font-size: 14px;
+      font-family: sans-serif;
+    }
+
+    .section {
+      display: inline-block;
+      vertical-align: top;
+      float: left;
+      cursor: pointer;
+      font-size: 12px;
+      text-decoration: none;
+      transition: .125s ease all;
+      color: rgba(255,255,255,0.4);
+    }
+    .section:hover {
+      color: rgba(255,255,255,0.8);
+    }
+    .section .fa {
+      font-size: 72px;
+      display: block;
+      margin-bottom: 30px;
+    }
+    .section .password {
+      cursor: text;
+    }
+    .torrents { background-color: #1693A7; }
+    .couchpotato { background-color: #CC0C39; }
+    .sonarr { background-color: #C8CF02; }
+    .plex { background-color: #E6781E; }
+
+    @media (max-width: 999px) {
+      .section {
+        width: 100%;
+        height: 25vh;
+        min-height: 200px;
+        padding-top: 10%;
+      }
+    }
+    @media (min-width: 1000px) {
+      .section {
+        width: 25%;
+        height: 100%;
+        padding-top: 30vh;
+      }
+      .section:hover {
+        padding-top: 25vh;
+      }
+    }
+
+    .logout {
+      font-size: 36px;
+      position: fixed;
+      bottom: 20px;
+      right: 30px;
+      cursor: pointer;
+      transition: .125s ease color;
+    }
+    .logout:hover {
+      color: rgba(255,255,255,0.8);
+    }
+  </style>
+</head>
+<body>
+  <a class="section clip torrents" href="https://torrents.stonercoder.com" data-clipboard-target=".torrents .password">
+    <i class="fa fa-cloud-download"></i>
+    <span class="password"></span>
+  </a>
+  <a class="section clip sonarr" href="https://sonarr.stonercoder.com" data-clipboard-target=".sonarr .password">
+    <i class="fa fa-tv"></i>
+    admin /
+    <span class="password"></span>
+  </a>
+  <a class="section clip couchpotato" href="https://couchpotato.stonercoder.com" data-clipboard-target=".couchpotato .password">
+    <i class="fa fa-film"></i>
+    admin /
+    <span class="password"></span>
+  </a>
+  <a class="section plex" href="https://plex.stonercoder.com">
+    <i class="fa fa-play"></i>
+  </a>
+
+  <i class="fa fa-lock logout"></i>
+
+  <div class="curtain">
+    <i class="fa fa-lock"></i>
+    <form class="auth">
+      <input type="password" name="password">
+    </form>
+    <h6 class="quote">
+      "We have what we need, if we use what we have." — Edgar Cahn
+    </h6>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/core-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/sha512.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+  <script>
+  const PASSWORD_HASH = '828c2b7cd9d424b84ff651cfca7c753d5ea0fef5845a33447fa94912a16e0c12be09d2ecbeadba5b97dba00e29a4c0c55a3e07171640a84e5f1e9ebe9e014caf'
+  const ENCRYPTED_PASSWORDS = {
+    torrents: 'U2FsdGVkX1+WPadf6ouhAZczluVN/uyMIb4C7NDpmPBvFkhSUPDNsGJjwIuL3x5A',
+    sonarr: 'U2FsdGVkX18ERUaV9+ko7jP+DiXw8x+H20wSVDORUDdHND3fq1DhdK9LNUdedBm7',
+    couchpotato: 'U2FsdGVkX1+Txm09bm6SjTQvFGMkRG/PsO9v/8QwcJQP3O/Nv35pI+5qSLQSGWKv'
+  }
+
+  let $curtain, $form, $input, $lock
+
+  function authenticate(pw) {
+    if (!pw) {
+      pw = $input.val()
+    }
+
+    const matches = CryptoJS.SHA512(pw).toString() === PASSWORD_HASH
+
+    if (matches) {
+      $curtain.animate({ top: '-100%' })
+      sessionStorage.setItem('password', pw)
+      decryptAll(pw)
+    } else {
+      $lock.addClass('animated shake')
+      setTimeout(() => $lock.removeClass('animated shake'), 400)
+    }
+
+    $input.val('')
+
+    return matches
+  }
+
+  function logout() {
+    sessionStorage.setItem('password', false)
+    $('span.password').val('')
+    $curtain.animate({ top: '0' })
+  }
+
+  function decryptAll(pw) {
+    decrypt('torrents', pw)
+    decrypt('sonarr', pw)
+    decrypt('couchpotato', pw)
+  }
+
+  function decrypt(site, pw) {
+    const raw = CryptoJS.AES.decrypt(ENCRYPTED_PASSWORDS[site], pw).toString(CryptoJS.enc.Utf8)
+    $(`.${site} .password`).text(raw)
+  }
+
+  $(() => {
+    const pw = sessionStorage.getItem('password')
+    $curtain = $('.curtain')
+    $form = $('form')
+    $input = $('input')
+    $lock = $('.fa-lock')
+    $logout = $('.logout')
+
+    if (pw) {
+      authenticate(pw)
+    }
+
+    $form.on('submit', (e) => {
+      e.preventDefault()
+      authenticate()
+    })
+
+    $logout.on('click', logout)
+
+    new Clipboard('a.clip')
+  })
+  </script>
+</body>
+</html>
