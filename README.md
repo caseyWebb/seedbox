@@ -1,4 +1,4 @@
-# seedbox
+# :tv: seedbox
 
 Provisions a ready to go HTPC complete with:
 
@@ -7,7 +7,7 @@ Provisions a ready to go HTPC complete with:
   - CouchPotato, Sonarr, and Headphones for Movie, TV, and Music PVR
   - Plex
 
-#### Usage
+### Usage
 
 You will need a domain. The setup script uses certbot (formerly letsencrypt)
 to create SSL certs and it expects to be able to reach the domain configured
