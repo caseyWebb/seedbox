@@ -1,6 +1,14 @@
 version: '2'
 
 services:
+  nginx:
+    container_name: nginx
+    image: nginx
+    network_mode: host
+    volumes:
+     - ./nginx:/etc/nginx:ro
+    env_file: .env
+
   deluge:
     container_name: deluge
     image: linuxserver/deluge
