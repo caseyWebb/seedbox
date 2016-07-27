@@ -53,7 +53,7 @@ open the following ports in your router and firewall:
 
 then press any key to continue...
 " _
-  docker run -v $(pwd)/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone --force-renewal \
+  docker run -v $(pwd)/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone \
     -d www.$NGINX_HOST \
     -d deluge.$NGINX_HOST \
     -d nzbget.$NGINX_HOST \
