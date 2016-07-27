@@ -49,8 +49,6 @@ open the following ports in your router and firewall:
 
 then press any key to continue...
 " _
-
-  echo "Generating ssl certificates"
   docker run -v $(pwd)/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone \
     -d www.$NGINX_HOST \
     -d deluge.$NGINX_HOST \
@@ -58,8 +56,7 @@ then press any key to continue...
     -d couchpotato.$NGINX_HOST \
     -d headphones.$NGINX_HOST \
     -d plex.$NGINX_HOST
-  
-  echo "Generating dhparam"
+
   docker run -v $(pwd)/certs:/certs -t jordi/openssl-ca openssl dhparam -out /certs/dhparam.pem 2048
 fi
 
