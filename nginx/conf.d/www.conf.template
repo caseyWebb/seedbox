@@ -1,0 +1,17 @@
+server {
+  listen 80;
+  server_name www.${NGINX_HOST};
+  return 301 https://$host$request_uri;
+}
+
+server {
+  listen 443 ssl;
+  server_name www.${NGINX_HOST};
+
+  ssl_certificate /certs/live/www.${NGINX_HOST}/fullchain.pem;
+  ssl_certificate_key /certs/live/www.${NGINX_HOST}/privkey.pem;
+  ssl_dhparam /certs/dhparam.pem;
+
+  root /srv/www;
+  index index.html;
+}
