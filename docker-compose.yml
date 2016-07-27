@@ -6,8 +6,11 @@ services:
     image: nginx
     network_mode: host
     volumes:
-     - ./nginx:/etc/nginx:ro
+     - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+     - ./nginx/sites-enabled:/etc/nginx/sites-enabled:ro
+     - ./nginx/www:/srv/www
     env_file: .env
+    command: /bin/bash -c "envsubst < /etc/nginx/conf.d/mysite.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
 
   deluge:
     container_name: deluge
