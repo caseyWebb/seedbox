@@ -24,7 +24,7 @@ fi
 chown seedbox:seedbox -R .
 chown seedbox:seedbox -R $MEDIA_ROOT
 
-if [ ! -d ./certs/live ]; then
+if [ ! -d ./volumes/certs/live ]; then
   read -n1 -r -p "
 Please add a DNS A or CNAME record for each of the following subdomains:
   deluge.$HOST
