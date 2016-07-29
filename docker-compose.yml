@@ -22,6 +22,7 @@ services:
       - "${MEDIA_ROOT}/.downloads:/downloads"
       - "${MEDIA_ROOT}/.torrents:/torrents"
       - "${MEDIA_ROOT}/movies:/movies:ro"
+      - "${MEDIA_ROOT}/music:/music:ro"
       - "${MEDIA_ROOT}/tv:/tv:ro"
     env_file: .env
 
@@ -64,6 +65,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - ./volumes/headphones:/config
       - "${MEDIA_ROOT}/.downloads:/downloads"
+      - "${MEDIA_ROOT}/.torrents:/torrents"
       - "${MEDIA_ROOT}/music:/music"
     env_file: .env
 
