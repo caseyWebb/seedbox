@@ -43,15 +43,15 @@ open the following ports in your router and firewall:
 
 then press any key to continue...
 " _
-  docker run -v $(pwd)/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d www.$HOST
-  docker run -v $(pwd)/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d deluge.$HOST
-  docker run -v $(pwd)/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d nzbget.$HOST
-  docker run -v $(pwd)/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d sonarr.$HOST
-  docker run -v $(pwd)/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d couchpotato.$HOST
-  docker run -v $(pwd)/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d headphones.$HOST
-  docker run -v $(pwd)/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d plex.$HOST
+  docker run -v $(pwd)/volumes/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d www.$HOST
+  docker run -v $(pwd)/volumes/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d deluge.$HOST
+  docker run -v $(pwd)/volumes/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d nzbget.$HOST
+  docker run -v $(pwd)/volumes/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d sonarr.$HOST
+  docker run -v $(pwd)/volumes/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d couchpotato.$HOST
+  docker run -v $(pwd)/volumes/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d headphones.$HOST
+  docker run -v $(pwd)/volumes/certs:/etc/letsencrypt --net=host -t deliverous/certbot certonly --agree-tos --email $CERTBOT_EMAIL --standalone -d plex.$HOST
 
-  docker run -v $(pwd)/certs:/certs -t jordi/openssl-ca openssl dhparam -out /certs/dhparam.pem 2048
+  docker run -v $(pwd)/volumes/certs:/certs -t jordi/openssl-ca openssl dhparam -out /certs/dhparam.pem 2048
 fi
 
 docker-compose create
