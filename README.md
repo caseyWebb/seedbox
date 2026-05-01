@@ -1,3 +1,7 @@
+> [!IMPORTANT]
+>
+> I no longer use or maintain this repository. It's very outdated. I suggest heading over to https://geek-cookbook.funkypenguin.co.nz these days.
+
 # :tv: seedbox
 
 Provisions a ready to go HTPC complete with:
